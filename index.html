@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Category-Level Articulated In-Hand Manipulation</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --paper: #fffaf3;
+      --ink: #1f2933;
+      --muted: #68717d;
+      --line: #e5dacc;
+      --accent: #9a4f2f;
+      --teal: #2f6f73;
+      --gold: #d6a44f;
+      --soft: #efe6d8;
+      --shadow: 0 22px 60px rgba(31, 41, 51, .11);
+      --r: 22px
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, rgba(214, 164, 79, .22), transparent 32rem), radial-gradient(circle at top right, rgba(47, 111, 115, .16), transparent 35rem), var(--bg);
+      line-height: 1.6
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(247, 244, 239, .84);
+      border-bottom: 1px solid rgba(229, 218, 204, .9)
+    }
+
+    .nav-inner {
+      max-width: 1180px;
+      margin: auto;
+      padding: 13px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .brand {
+      display: flex;
+      gap: 11px;
+      align-items: center;
+      font-weight: 850;
+      letter-spacing: -.03em
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--accent), var(--gold));
+      display: grid;
+      place-items: center;
+      color: white;
+      box-shadow: 0 10px 25px rgba(154, 79, 47, .22)
+    }
+
+    .links {
+      display: flex;
+      gap: 18px;
+      color: #4b5563;
+      font-size: 14px;
+      font-weight: 700
+    }
+
+    .links a:hover {
+      color: var(--accent)
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: auto;
+      padding: 0 24px
+    }
+
+    .hero {
+      padding: 72px 0 44px;
+      text-align: center
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 7px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 250, 243, .75);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 22px
+    }
+
+    h1 {
+      max-width: 1040px;
+      margin: 0 auto 18px;
+      font-size: clamp(40px, 6.8vw, 82px);
+      line-height: .98;
+      letter-spacing: -.065em
+    }
+
+    .subtitle {
+      max-width: 880px;
+      margin: 0 auto;
+      color: #4b5563;
+      font-size: clamp(17px, 2.2vw, 22px);
+      line-height: 1.48
+    }
+
+    .authors {
+      color: #4b5563;
+      margin: 18px auto 28px;
+      font-size: 16px
+    }
+
+    .authors b {
+      color: var(--ink)
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 780;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: 0 10px 26px rgba(31, 41, 51, .07);
+      transition: .18s
+    }
+
+    .btn.primary {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink)
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(31, 41, 51, .13)
+    }
+
+    .teaser {
+      margin: 34px auto 8px;
+      padding: 16px;
+      background: rgba(255, 250, 243, .8);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow: var(--shadow)
+    }
+
+    .video {
+      aspect-ratio: 16/9;
+      border-radius: var(--r);
+      overflow: hidden;
+      background: #111827
+    }
+
+    .video video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #111827
+    }
+
+    section {
+      padding: 62px 0
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 26px
+    }
+
+    .kicker {
+      color: var(--accent);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .11em;
+      font-weight: 850;
+      margin-bottom: 7px
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -.045em
+    }
+
+    .desc {
+      max-width: 540px;
+      color: #5b6470;
+      font-size: 16px
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px
+    }
+
+    .cols3 {
+      grid-template-columns: repeat(3, 1fr)
+    }
+
+    .cols4 {
+      grid-template-columns: repeat(4, 1fr)
+    }
+
+    .card {
+      background: rgba(255, 250, 243, .88);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 22px;
+      box-shadow: 0 14px 35px rgba(31, 41, 51, .06)
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+      letter-spacing: -.025em;
+      line-height: 1.2
+    }
+
+    .card p {
+      margin: 0;
+      color: #5b6470;
+      font-size: 15.5px
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--soft);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      color: var(--accent);
+      font-size: 22px
+    }
+
+    .abstract {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 26px
+    }
+
+    .abstract-text {
+      font-size: 18px;
+      color: #374151
+    }
+
+    .abstract-text p:first-child {
+      margin-top: 0
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, rgba(154, 79, 47, .10), rgba(47, 111, 115, .10));
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 24px
+    }
+
+    .big {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(229, 218, 204, .95)
+    }
+
+    .big:last-child {
+      border-bottom: 0
+    }
+
+    .num {
+      font-size: 42px;
+      font-weight: 950;
+      color: var(--teal);
+      letter-spacing: -.07em;
+      line-height: 1
+    }
+
+    .num-label {
+      font-weight: 850;
+      letter-spacing: -.02em
+    }
+
+    .num-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 2px
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px
+    }
+
+    .step {
+      position: relative;
+      padding: 20px 16px;
+      border-radius: var(--r);
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 243, .9);
+      min-height: 190px
+    }
+
+    .step:after {
+      content: '→';
+      position: absolute;
+      right: -14px;
+      top: 48%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-weight: 950;
+      font-size: 24px
+    }
+
+    .step:last-child:after {
+      display: none
+    }
+
+    .step-no {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: white;
+      font-size: 13px;
+      font-weight: 850;
+      margin-bottom: 16px
+    }
+
+    .step h3 {
+      font-size: 18px;
+      line-height: 1.18;
+      margin: 0 0 8px;
+      letter-spacing: -.025em
+    }
+
+    .step p {
+      margin: 0;
+      color: #5b6470;
+      font-size: 14px;
+      line-height: 1.45
+    }
+
+    .media {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px
+    }
+
+    .ph {
+      border-radius: var(--r);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--paper)
+    }
+
+    .ph.figure-pdf {
+      min-height: 0
+    }
+
+    .method-figure {
+      width: 100%;
+      display: block;
+      background: var(--paper)
+    }
+
+    .figure-title {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -.025em
+    }
+
+    .ph.combined {
+      min-height: 240px
+    }
+
+    .label {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: white;
+      background: rgba(0, 0, 0, .32);
+      backdrop-filter: blur(10px);
+      font-weight: 800;
+      font-size: 13px
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px
+    }
+
+    .metric {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      padding: 20px;
+      text-align: center
+    }
+
+    .metric-value {
+      font-size: 38px;
+      font-weight: 950;
+      color: var(--accent);
+      letter-spacing: -.06em;
+      line-height: 1;
+      margin-bottom: 8px
+    }
+
+    .metric-name {
+      font-weight: 850;
+      margin-bottom: 4px
+    }
+
+    .metric-desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35
+    }
+
+    .result-videos {
+      display: grid;
+      gap: 24px;
+      margin-top: 22px
+    }
+
+    .video-panel h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: -.025em
+    }
+
+    .video-panel h4 {
+      margin: 18px 0 10px;
+      font-size: 17px;
+      line-height: 1.2;
+      letter-spacing: -.018em
+    }
+
+    .video-grid {
+      display: grid;
+      gap: 12px
+    }
+
+    .video-grid.sim {
+      grid-template-columns: repeat(4, 1fr)
+    }
+
+    .result-video {
+      aspect-ratio: 16/9;
+      border-radius: var(--r);
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(31, 41, 51, .76), rgba(47, 111, 115, .52));
+      position: relative;
+      overflow: hidden
+    }
+
+    .result-video video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #111827
+    }
+
+    .result-video .label {
+      left: 14px;
+      bottom: 14px;
+      max-width: calc(100% - 28px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+
+    .result-browser {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      gap: 18px;
+      align-items: start
+    }
+
+    .browser-player {
+      aspect-ratio: 16/9;
+      border-radius: var(--r);
+      border: 1px solid var(--line);
+      background: #111827;
+      position: relative;
+      overflow: hidden
+    }
+
+    .browser-player video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #111827
+    }
+
+    .browser-controls {
+      display: grid;
+      gap: 14px
+    }
+
+    .control-group {
+      display: grid;
+      gap: 8px
+    }
+
+    .control-label {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase
+    }
+
+    .segmented {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .segmented button {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 8px 12px
+    }
+
+    .segmented button.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: white
+    }
+
+    .result-table {
+      margin-top: 16px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      background: rgba(255, 250, 243, .88)
+    }
+
+    .result-table table {
+      width: 100%;
+      min-width: 860px;
+      border-collapse: collapse
+    }
+
+    .result-table th,
+    .result-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(229, 218, 204, .95);
+      font-size: 14px
+    }
+
+    .result-table th {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase
+    }
+
+    .result-table tr:last-child td {
+      border-bottom: 0
+    }
+
+    .findings {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px
+    }
+
+    .finding {
+      padding: 24px;
+      border-radius: var(--r);
+      color: white;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow)
+    }
+
+    .finding:nth-child(1) {
+      background: linear-gradient(135deg, #9a4f2f, #d6a44f)
+    }
+
+    .finding:nth-child(2) {
+      background: linear-gradient(135deg, #2f6f73, #1f2933)
+    }
+
+    .finding:nth-child(3) {
+      background: linear-gradient(135deg, #1f2933, #9a4f2f)
+    }
+
+    .finding h3 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.14;
+      letter-spacing: -.035em
+    }
+
+    .finding p {
+      margin: 16px 0 0;
+      color: rgba(255, 255, 255, .84);
+      font-size: 15px
+    }
+
+    .bib {
+      background: #1f2933;
+      color: #f9fafb;
+      border-radius: var(--r);
+      padding: 22px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.55;
+      white-space: pre
+    }
+
+    @media(max-width:960px) {
+      .links {
+        display: none
+      }
+
+      .abstract,
+      .media {
+        grid-template-columns: 1fr
+      }
+
+      .cols3,
+      .cols4,
+      .results,
+      .findings {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .video-grid.sim {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .result-browser {
+        grid-template-columns: 1fr
+      }
+
+      .pipeline {
+        grid-template-columns: 1fr
+      }
+
+      .step:after {
+        content: '↓';
+        right: 50%;
+        top: auto;
+        bottom: -26px;
+        transform: translateX(50%)
+      }
+    }
+
+    @media(max-width:640px) {
+      .container {
+        padding: 0 16px
+      }
+
+      .hero {
+        padding-top: 48px
+      }
+
+      .cols3,
+      .cols4,
+      .results,
+      .findings {
+        grid-template-columns: 1fr
+      }
+
+      .section-head {
+        display: block
+      }
+
+      .desc {
+        margin-top: 10px
+      }
+
+      .teaser {
+        padding: 10px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner"><a class="brand" href="#"><span class="mark">✦</span><span>ArtManip</span></a>
+      <div class="links"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a
+          href="#findings">Findings</a><a href="#bibtex">BibTeX</a></div>
+    </div>
+  </nav>
+  <main>
+    <header class="hero">
+      <div class="container">
+        <h1>ArtManip : Category-Level Articulated In-Hand Manipulation</h1>
+        <p class="subtitle">Learning dexterous policies of in-hand articulated objects that generalize across intra-class instances and initial
+          grasps, with zero-shot sim2real capability.
+        </p>
+        <div class="authors"><b>Yang Yang</b><sup>1,2</sup> · <b>Tengyu Liu</b><sup>2</sup> · <b>Puhao Li</b><sup>2,3</sup> · <b>Zeyuan Chen</b><sup>2,4</sup> · <b>Yuyang Li</b><sup>2,4</sup> · <b>Xingwan Wang</b><sup>2</sup> · <b>Yingying Wu</b><sup>2,3</sup> · <b>Zhaopeng Cui</b><sup>1</sup> · <b>Siyuan Huang</b><sup>2</sup><br><span><sup>1</sup>State Key Laboratory of CAD&CG, Zhejiang University &nbsp; <sup>2</sup>State Key Lab of General Artificial Intelligence, BIGAI &nbsp; <sup>3</sup>Tsinghua University &nbsp; <sup>4</sup>PeKing University</span></div>
+        <div class="buttons"><a class="btn primary" href="#video">▶️ Video</a><a class="btn" href="#bibtex">❞
+            BibTeX</a></div>
+        <div class="teaser" id="video">
+          <div class="video">
+            <video controls preload="metadata" playsinline>
+              <source src="homepage/homepage.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section id="abstract">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Overview</div>
+            <h2>What problem do we solve?</h2>
+          </div>
+          <p class="desc">Articulated in-hand manipulation requires controlling an object's internal degree of freedom
+            while stabilizing a free-floating base.</p>
+        </div>
+        <div class="abstract">
+          <div class="card abstract-text">
+            <p>In-hand manipulation of articulated objects is challenging because articulation control is tightly
+              coupled with grasp stability. Unlike environment-anchored articulated manipulation, the object base is
+              free-floating in the hand; unlike rigid-object in-hand manipulation, the policy must actively actuate an
+              internal joint while maintaining stable contacts.</p>
+            <p>We present a framework for category-level articulated in-hand manipulation under diverse initial grasp
+              configurations. Our key idea is to automatically construct the training distribution through
+              primitive-based articulated object generation and task-oriented functional grasp synthesis. Policies are
+              trained in simulation with reward curriculum and teacher–student latent distillation, then deployed
+              zero-shot to real objects using primitive-based digital twins.</p>
+          </div>
+          <div class="highlight">
+            <div class="big">
+              <div class="num">4</div>
+              <div>
+                <div class="num-label">Articulated categories</div>
+                <div class="num-sub">Knife, lighter, stapler, and tong.</div>
+              </div>
+            </div>
+            <div class="big">
+              <div class="num">35</div>
+              <div>
+                <div class="num-label">Sim objects per category</div>
+                <div class="num-sub">30 training instances + 5 unseen test instances.</div>
+              </div>
+            </div>
+            <div class="big">
+              <div class="num">12</div>
+              <div>
+                <div class="num-label">Real-world objects</div>
+                <div class="num-sub">Three real instances for each category.</div>
+              </div>
+            </div>
+            <div class="big">
+              <div class="num">CSC</div>
+              <div>
+                <div class="num-label">Long-horizon manipulation</div>
+                <div class="num-sub">Repeated open–close cycles under diverse grasps.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="challenge">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Challenges</div>
+            <h2>Why is this hard?</h2>
+          </div>
+          <p class="desc">The difficulty is not only generating motion, but generating the right contacts, stabilizing
+            the object, and handling uncertain articulation physics.</p>
+        </div>
+        <div class="grid cols3">
+          <div class="card">
+            <div class="icon">🧩</div>
+            <h3>Articulated assets are hard to scale</h3>
+            <p>Accurate models of small articulated tools are labor-intensive to reconstruct, annotate, and simulate at
+              scale.</p>
+          </div>
+          <div class="card">
+            <div class="icon">✋</div>
+            <h3>Functional grasps are sensitive</h3>
+            <p>The grasp must simultaneously stabilize the free-floating object and provide contacts that can actuate
+              the joint.</p>
+          </div>
+          <div class="card">
+            <div class="icon">⚙️</div>
+            <h3>Joint physics vary across instances</h3>
+            <p>Different damping, stiffness, friction, and mass distributions can drastically change the required finger
+              behavior.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="method">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Method</div>
+            <h2>Primitive assets → functional grasps → robust policy</h2>
+          </div>
+          <p class="desc">The pipeline builds a scalable training distribution, then learns a deployable student policy
+            under partial observations.</p>
+        </div>
+        <div class="pipeline">
+          <div class="step">
+            <div class="step-no">1</div>
+            <h3>Primitive articulated assets</h3>
+            <p>Generate two-link objects with one prismatic or revolute joint using simple box primitives.</p>
+          </div>
+          <div class="step">
+            <div class="step-no">2</div>
+            <h3>Functional grasp synthesis</h3>
+            <p>Use category-level contact-region templates to synthesize diverse task-oriented initial grasps.</p>
+          </div>
+          <div class="step">
+            <div class="step-no">3</div>
+            <h3>Teacher policy learning</h3>
+            <p>Train with privileged state, reward curriculum, and articulation physics randomization.</p>
+          </div>
+          <div class="step">
+            <div class="step-no">4</div>
+            <h3>Student deployment</h3>
+            <p>Distill a latent representation from observable history for zero-shot real-world execution.</p>
+          </div>
+        </div>
+        <div class="media">
+          <div>
+            <h3 class="figure-title">Initial Configuration Construction</h3>
+            <div class="ph figure-pdf combined">
+              <img class="method-figure" src="gen4.png" alt="Primitive assets and functional grasps">
+            </div>
+          </div>
+          <div>
+            <h3 class="figure-title">Teacher-Student Training</h3>
+            <div class="ph figure-pdf">
+              <img class="method-figure" src="fig_pipeline_full.png" alt="Method overview figure">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="results">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Results</div>
+            <h2>Generalization across objects and grasps</h2>
+          </div>
+        </div>
+        <div class="results">
+          <div class="metric">
+            <div class="metric-value">100%</div>
+            <div class="metric-name">Instance Coverage</div>
+            <div class="metric-desc">At least one successful grasp per object instance.</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">90%+</div>
+            <div class="metric-name">Grasp Coverage</div>
+            <div class="metric-desc">Robustness across diverse functional grasps.</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">12/12</div>
+            <div class="metric-name">Real Objects</div>
+            <div class="metric-desc">Zero-shot deployment on physical articulated objects.</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">CSC</div>
+            <div class="metric-name">Long-Horizon Cycles</div>
+            <div class="metric-desc">Repeated open–close manipulation before failure.</div>
+          </div>
+        </div>
+        <div class="result-videos">
+          <div class="video-panel">
+            <h3>Simulation Results</h3>
+            <div class="video-grid sim">
+              <div class="result-video">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="homepage/sim/knife.mp4" type="video/mp4">
+                </video>
+                <div class="label">knife</div>
+              </div>
+              <div class="result-video">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="homepage/sim/lighter.mp4" type="video/mp4">
+                </video>
+                <div class="label">lighter</div>
+              </div>
+              <div class="result-video">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="homepage/sim/stapler.mp4" type="video/mp4">
+                </video>
+                <div class="label">stapler</div>
+              </div>
+              <div class="result-video">
+                <video autoplay muted loop playsinline preload="metadata">
+                  <source src="homepage/sim/tong.mp4" type="video/mp4">
+                </video>
+                <div class="label">tong</div>
+              </div>
+            </div>
+            <div class="result-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th># Inst.</th>
+                    <th># Total Grasps</th>
+                    <th>IC ↑</th>
+                    <th>GC ↑</th>
+                    <th>CSC mean ↑</th>
+                    <th>CSC max ↑</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Knife</td>
+                    <td>5</td>
+                    <td>54</td>
+                    <td>100%</td>
+                    <td>93.8%</td>
+                    <td>2.6</td>
+                    <td>5.6</td>
+                  </tr>
+                  <tr>
+                    <td>Lighter</td>
+                    <td>5</td>
+                    <td>101</td>
+                    <td>100%</td>
+                    <td>92.8%</td>
+                    <td>1.4</td>
+                    <td>7.0</td>
+                  </tr>
+                  <tr>
+                    <td>Stapler</td>
+                    <td>5</td>
+                    <td>213</td>
+                    <td>100%</td>
+                    <td>76.4%</td>
+                    <td>1.4</td>
+                    <td>8.6</td>
+                  </tr>
+                  <tr>
+                    <td>Tong</td>
+                    <td>5</td>
+                    <td>287</td>
+                    <td>100%</td>
+                    <td>90.6%</td>
+                    <td>2.3</td>
+                    <td>8.6</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="video-panel">
+            <h3>Real-World Results</h3>
+            <div class="result-browser" id="real-browser">
+              <div class="browser-player">
+                <video id="real-result-video" autoplay muted loop playsinline preload="metadata"
+                  src="homepage/crosscate/knife0.mp4"></video>
+                <div class="label" id="real-result-label">knife_0</div>
+              </div>
+              <div class="browser-controls">
+                <div class="control-group">
+                  <div class="control-label">Setting</div>
+                  <div class="segmented" id="setting-controls"></div>
+                </div>
+                <div class="control-group">
+                  <div class="control-label">Category</div>
+                  <div class="segmented" id="category-controls"></div>
+                </div>
+                <div class="control-group">
+                  <div class="control-label">Clip</div>
+                  <div class="segmented" id="clip-controls"></div>
+                </div>
+              </div>
+            </div>
+            <div class="result-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th># Inst.</th>
+                    <th># Total Grasps</th>
+                    <th>IC ↑</th>
+                    <th>GC ↑</th>
+                    <th>CSC mean ↑</th>
+                    <th>CSC max ↑</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Knife</td>
+                    <td>3</td>
+                    <td>15</td>
+                    <td>100%</td>
+                    <td>80.0%</td>
+                    <td>1.8</td>
+                    <td>3.3</td>
+                  </tr>
+                  <tr>
+                    <td>Lighter</td>
+                    <td>3</td>
+                    <td>15</td>
+                    <td>100%</td>
+                    <td>86.8%</td>
+                    <td>2.1</td>
+                    <td>3.3</td>
+                  </tr>
+                  <tr>
+                    <td>Stapler</td>
+                    <td>3</td>
+                    <td>15</td>
+                    <td>100%</td>
+                    <td>93.3%</td>
+                    <td>6.1</td>
+                    <td>7.0</td>
+                  </tr>
+                  <tr>
+                    <td>Tong</td>
+                    <td>3</td>
+                    <td>15</td>
+                    <td>100%</td>
+                    <td>100%</td>
+                    <td>5.0</td>
+                    <td>7.0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="findings">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Key Findings</div>
+            <h2>What did we learn?</h2>
+          </div>
+          <p class="desc">Three concise takeaways for the paper and presentation.</p>
+        </div>
+        <div class="findings">
+          <div class="finding">
+            <h3>Primitive assets are enough for real transfer.</h3>
+            <p>Task-relevant interaction structure matters more than high-fidelity visual geometry for this setting.</p>
+          </div>
+          <div class="finding">
+            <h3>Curriculum resolves the progress–stability trade-off.</h3>
+            <p>The policy must first learn to actuate the joint, then progressively enforce stable in-hand manipulation.
+            </p>
+          </div>
+          <div class="finding">
+            <h3>Functional grasps and physics randomization drive generalization.</h3>
+            <p>High-quality contacts enable exploration; randomized articulation physics improves robustness.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="bibtex">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Citation</div>
+            <h2>BibTeX</h2>
+          </div>
+        </div>
+        <div class="bib">@inproceedings{yourname2026articulatedinhand,
+          title = {ARTMANIP:Category-Level Articulated In-Hand Manipulation},
+          author = {Author One and Author Two and Author Three},
+          booktitle = {Conference on Robot Learning},
+          year = {2026}
+          }</div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const realVideoData = {
+      crossInstance: {
+        label: 'Cross Instance',
+        clips: {
+          knife: [
+            { label: 'knife_0', src: 'homepage/crosscate/knife0.mp4' },
+            { label: 'knife_1', src: 'homepage/crosscate/knife1.mp4' },
+            { label: 'knife_2', src: 'homepage/crosscate/knife2.mp4' }
+          ],
+          lighter: [
+            { label: 'lighter_0', src: 'homepage/crosscate/lighter0.mp4' },
+            { label: 'lighter_1', src: 'homepage/crosscate/lighter1.mp4' },
+            { label: 'lighter_2', src: 'homepage/crosscate/lighter2.mp4' }
+          ],
+          stapler: [
+            { label: 'stapler_0', src: 'homepage/crosscate/stapler0.mp4' },
+            { label: 'stapler_1', src: 'homepage/crosscate/stapler1.mp4' },
+            { label: 'stapler_2', src: 'homepage/crosscate/stapler2.mp4' }
+          ],
+          tong: [
+            { label: 'tong_0', src: 'homepage/crosscate/tong0.mp4' },
+            { label: 'tong_1', src: 'homepage/crosscate/tong1.mp4' },
+            { label: 'tong_2', src: 'homepage/crosscate/tong2.mp4' }
+          ]
+        }
+      },
+      crossGrasp: {
+        label: 'Cross Initial Grasp',
+        clips: {
+          knife: [
+            { label: 'grasp_0', src: 'homepage/crossgrasp/knife_grasp0.mp4' },
+            { label: 'grasp_1', src: 'homepage/crossgrasp/knife_grasp1.mp4' }
+          ],
+          lighter: [
+            { label: 'grasp_0', src: 'homepage/crossgrasp/lighter_grasp0.mp4' },
+            { label: 'grasp_1', src: 'homepage/crossgrasp/lighter_grasp1.mp4' }
+          ],
+          stapler: [
+            { label: 'grasp_0', src: 'homepage/crossgrasp/stapler_grasp0.mp4' },
+            { label: 'grasp_1', src: 'homepage/crossgrasp/stapler_grasp1.mp4' }
+          ],
+          tong: [
+            { label: 'grasp_0', src: 'homepage/crossgrasp/tong_grasp0.mp4' },
+            { label: 'grasp_1', src: 'homepage/crossgrasp/tong_grasp1.mp4' }
+          ]
+        }
+      },
+      longHorizon: {
+        label: 'Long-Horizon',
+        clips: {
+          knife: [{ label: '40s', src: 'homepage/long/knife.mp4' }],
+          lighter: [{ label: '40s', src: 'homepage/long/lighter.mp4' }],
+          stapler: [{ label: '40s', src: 'homepage/long/stapler.mp4' }],
+          tong: [{ label: '40s', src: 'homepage/long/tong.mp4' }]
+        }
+      }
+    };
+
+    const realState = {
+      setting: 'crossInstance',
+      category: 'knife',
+      clip: 0
+    };
+
+    const settingControls = document.getElementById('setting-controls');
+    const categoryControls = document.getElementById('category-controls');
+    const clipControls = document.getElementById('clip-controls');
+    const realVideo = document.getElementById('real-result-video');
+    const realLabel = document.getElementById('real-result-label');
+
+    function makeButton(label, active, onClick) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = label;
+      button.className = active ? 'active' : '';
+      button.addEventListener('click', onClick);
+      return button;
+    }
+
+    function renderRealBrowser() {
+      const setting = realVideoData[realState.setting];
+      const categories = Object.keys(setting.clips);
+      const clips = setting.clips[realState.category];
+      const clip = clips[realState.clip] || clips[0];
+
+      settingControls.replaceChildren(...Object.entries(realVideoData).map(([key, value]) =>
+        makeButton(value.label, key === realState.setting, () => {
+          realState.setting = key;
+          realState.category = Object.keys(realVideoData[key].clips)[0];
+          realState.clip = 0;
+          renderRealBrowser();
+        })
+      ));
+
+      categoryControls.replaceChildren(...categories.map(category =>
+        makeButton(category, category === realState.category, () => {
+          realState.category = category;
+          realState.clip = 0;
+          renderRealBrowser();
+        })
+      ));
+
+      clipControls.replaceChildren(...clips.map((item, index) =>
+        makeButton(item.label, index === realState.clip, () => {
+          realState.clip = index;
+          renderRealBrowser();
+        })
+      ));
+
+      realVideo.src = clip.src;
+      realLabel.textContent = clip.label;
+      realVideo.play().catch(() => { });
+    }
+
+    renderRealBrowser();
+  </script>
+</body>
+
+</html>
