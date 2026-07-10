@@ -757,10 +757,16 @@
     <header class="hero">
       <div class="container">
         <h1>ArtManip : Category-Level Articulated In-Hand Manipulation</h1>
-        <p class="subtitle">Learning dexterous policies of in-hand articulated objects that generalize across intra-class instances and initial
+        <p class="subtitle">Learning dexterous policies of in-hand articulated objects that generalize across
+          intra-class instances and initial
           grasps, with zero-shot sim2real capability.
         </p>
-        <div class="authors"><b>Yang Yang</b><sup>1,2</sup> · <b>Tengyu Liu</b><sup>2</sup> · <b>Puhao Li</b><sup>2,3</sup> · <b>Zeyuan Chen</b><sup>2,4</sup> · <b>Yuyang Li</b><sup>2,4</sup> · <b>Xingwan Wang</b><sup>2</sup> · <b>Yingying Wu</b><sup>2,3</sup> · <b>Zhaopeng Cui</b><sup>1</sup> · <b>Siyuan Huang</b><sup>2</sup><br><span><sup>1</sup>State Key Laboratory of CAD&CG, Zhejiang University &nbsp; <sup>2</sup>State Key Lab of General Artificial Intelligence, BIGAI &nbsp; <sup>3</sup>Tsinghua University &nbsp; <sup>4</sup>PeKing University</span></div>
+        <div class="authors"><b>Yang Yang</b><sup>1,2</sup> · <b>Tengyu Liu</b><sup>2</sup> · <b>Puhao
+            Li</b><sup>2,3</sup> · <b>Zeyuan Chen</b><sup>2,4</sup> · <b>Yuyang Li</b><sup>2,4</sup> · <b>Xingwan
+            Wang</b><sup>2</sup> · <b>Yingying Wu</b><sup>2,3</sup> · <b>Zhaopeng Cui</b><sup>1</sup> · <b>Siyuan
+            Huang</b><sup>2</sup><br><span><sup>1</sup>State Key Laboratory of CAD&CG, Zhejiang University &nbsp;
+            <sup>2</sup>State Key Lab of General Artificial Intelligence, BIGAI &nbsp; <sup>3</sup>Tsinghua University
+            &nbsp; <sup>4</sup>Peking University</span></div>
         <div class="buttons"><a class="btn" href="#video">▶️ Video</a><a class="btn" href="paper.pdf">📄
             Paper</a><a class="btn" href="https://github.com/artmanip/artmanip" target="_blank" rel="noopener">⌘
             Code</a><a class="btn" href="#bibtex">❞ BibTeX</a></div>
@@ -786,14 +792,15 @@
         </div>
         <div class="abstract">
           <div class="card abstract-text">
-            <p>In-hand manipulation of articulated objects is challenging because articulation control is tightly
-              coupled with grasp stability. Unlike environment-anchored articulated manipulation, the object base is
-              free-floating in the hand; unlike rigid-object in-hand manipulation, the policy must actively actuate an
-              internal joint while maintaining stable contacts.</p>
-            <p>We present a framework for category-level articulated in-hand manipulation under diverse initial grasp
+            <p>In-hand manipulation of articulated objects is challenging because the object base is free-floating in the hand, rather than anchored in the
+              environment, and the policy must actively actuate an internal joint while maintaining stable
+              contacts. Furthermore, acquiring diverse object models and functional grasps at
+              scale is highly labor-intensive, yet vital for generalization given the system’s sensitivity to initial configurations.</p>
+            <p>We present the first framework for category-level articulated in-hand manipulation under diverse initial
               configurations. Our key idea is to automatically construct the training distribution through
               primitive-based articulated object generation and task-oriented functional grasp synthesis. Policies are
-              trained in simulation with reward curriculum and teacher–student latent distillation, then deployed
+              trained in simulation that incorporates articulation physics randomization, reward curriculum, and latent
+              representation distillation, then deployed
               zero-shot to real objects using primitive-based digital twins.</p>
           </div>
           <div class="highlight">
@@ -815,7 +822,7 @@
               <div class="num">12</div>
               <div>
                 <div class="num-label">Real-world objects</div>
-                <div class="num-sub">Three real instances for each category.</div>
+                <div class="num-sub">3 real instances for each category.</div>
               </div>
             </div>
             <div class="big">
