@@ -749,7 +749,7 @@
 <body>
   <nav class="nav">
     <div class="nav-inner"><a class="brand" href="#"><span class="mark">✦</span><span>ArtManip</span></a>
-      <div class="links"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a
+      <div class="links"><a href="#method">Method</a><a href="#results">Results</a><a
           href="#findings">Findings</a><a href="#bibtex">BibTeX</a></div>
     </div>
   </nav>
@@ -780,94 +780,6 @@
         </div>
       </div>
     </header>
-    <section id="abstract">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Overview</div>
-            <h2>What problem do we solve?</h2>
-          </div>
-          <p class="desc">Articulated in-hand manipulation requires controlling an object's internal degree of freedom
-            while stabilizing a free-floating base.</p>
-        </div>
-        <div class="abstract">
-          <div class="card abstract-text">
-            <p>In-hand manipulation of articulated objects is challenging because the object base is free-floating in the hand, rather than anchored in the
-              environment, and the policy must actively actuate an internal joint while maintaining stable
-              contacts. Furthermore, acquiring diverse object models and functional grasps at
-              scale is highly labor-intensive, yet vital for generalization given the system’s sensitivity to initial configurations.</p>
-            <p>We present the first framework for category-level articulated in-hand manipulation under diverse initial
-              configurations. Our key idea is to automatically construct the training distribution through
-              primitive-based articulated object generation and task-oriented functional grasp synthesis. Policies are
-              trained in simulation that incorporates articulation physics randomization, reward curriculum, and latent
-              representation distillation, then deployed
-              zero-shot to real objects using primitive-based digital twins.</p>
-          </div>
-          <div class="highlight">
-            <div class="big">
-              <div class="num">4</div>
-              <div>
-                <div class="num-label">Articulated categories</div>
-                <div class="num-sub">Knife, lighter, stapler, and tong.</div>
-              </div>
-            </div>
-            <div class="big">
-              <div class="num">35</div>
-              <div>
-                <div class="num-label">Sim objects per category</div>
-                <div class="num-sub">30 training instances + 5 unseen test instances.</div>
-              </div>
-            </div>
-            <div class="big">
-              <div class="num">12</div>
-              <div>
-                <div class="num-label">Real-world objects</div>
-                <div class="num-sub">3 real instances for each category.</div>
-              </div>
-            </div>
-            <div class="big">
-              <div class="num">CSC</div>
-              <div>
-                <div class="num-label">Long-horizon manipulation</div>
-                <div class="num-sub">Repeated open–close cycles under diverse grasps.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="challenge">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Challenges</div>
-            <h2>Why is this hard?</h2>
-          </div>
-          <p class="desc">The difficulty is not only generating motion, but generating the right contacts, stabilizing
-            the object, and handling uncertain articulation physics.</p>
-        </div>
-        <div class="grid cols3">
-          <div class="card">
-            <div class="icon">🧩</div>
-            <h3>Articulated assets are hard to scale</h3>
-            <p>Accurate models of small articulated tools are labor-intensive to reconstruct, annotate, and simulate at
-              scale.</p>
-          </div>
-          <div class="card">
-            <div class="icon">✋</div>
-            <h3>Functional grasps are sensitive</h3>
-            <p>The grasp must simultaneously stabilize the free-floating object and provide contacts that can actuate
-              the joint.</p>
-          </div>
-          <div class="card">
-            <div class="icon">⚙️</div>
-            <h3>Joint physics vary across instances</h3>
-            <p>Different damping, stiffness, friction, and mass distributions can drastically change the required finger
-              behavior.</p>
-          </div>
-        </div>
-      </div>
-    </section>
     <section id="method">
       <div class="container">
         <div class="section-head">
