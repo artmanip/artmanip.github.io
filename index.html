@@ -749,12 +749,13 @@
 <body>
   <nav class="nav">
     <div class="nav-inner"><a class="brand" href="#"><span class="mark">✦</span><span>ArtManip</span></a>
-      <div class="links"><a href="#method">Method</a><a href="#results">Results</a><a href="#bibtex">BibTeX</a></div>
+      <div class="links"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#bibtex">BibTeX</a></div>
     </div>
   </nav>
   <main>
     <header class="hero">
       <div class="container">
+        <div class="eyebrow">Accepted at CoRL 2026</div>
         <h1>ArtManip : Category-Level Articulated In-Hand Manipulation</h1>
         <p class="subtitle">Learning dexterous policies of in-hand articulated objects that generalize across
           intra-class instances and initial
@@ -772,13 +773,23 @@
         <div class="teaser" id="video">
           <div class="video">
             <video controls preload="metadata" playsinline>
-              <source src="homepage/homepage.mp4" type="video/mp4">
+              <source src="homepage/homepage_new.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
         </div>
       </div>
     </header>
+    <section id="abstract">
+      <div class="container">
+        <div class="section-head">
+          <h2>Abstract</h2>
+        </div>
+        <div class="card abstract-text">
+          <p>Category-level in-hand manipulation of articulated objects is a formidable yet underexplored challenge for dexterous robotic hands. This difficulty stems from two core bottlenecks: first, controlling an object's internal degrees of freedom is tightly coupled with maintaining grasp stability on a free-floating base; second, acquiring diverse object models and functional grasps at scale is highly labor-intensive, yet vital for generalization given the system's sensitivity to initial configurations. In this work, we present ArtManip, the first category-level articulated in-hand manipulation method that generalizes across object instances and diverse initial grasps. For initial configuration construction, we develop an automated pipeline that procedurally generates diverse articulated objects and synthesizes task-oriented functional grasps. For policy learning, we propose a robust two-stage training strategy that incorporates articulation physics randomization, reward curriculum, and latent representation distillation to handle complex contact and joint dynamics during deployment. Extensive experiments across four object categories demonstrate that our policy generalizes to unseen instances and varied configurations in simulation, and achieves zero-shot transfer to 12 real-world objects featuring diverse shapes and joint mechanics.</p>
+        </div>
+      </div>
+    </section>
     <section id="method">
       <div class="container">
         <div class="section-head">

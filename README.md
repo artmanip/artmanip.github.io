@@ -8,7 +8,7 @@ Static GitHub Pages site for **ArtManip: Category-Level Articulated In-Hand Mani
 - `fig_pipeline_full.png` - teacher-student training figure.
 - `gen4.png` - initial configuration construction figure.
 - `paper.pdf` - optional paper link target used by the hero button.
-- `homepage/homepage.mp4` - main teaser video.
+- `homepage/homepage_new.mp4` - main teaser video (compressed for web playback).
 - `homepage/sim/` - simulation result videos.
 - `homepage/crosscate/` - real-world cross-instance videos.
 - `homepage/crossgrasp/` - real-world cross-initial-grasp videos.
