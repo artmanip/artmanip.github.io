@@ -281,13 +281,29 @@
       gap: 26px
     }
 
+    #abstract .container {
+      max-width: 840px
+    }
+
+    #abstract .section-head {
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 30px
+    }
+
     .abstract-text {
-      font-size: 18px;
+      font-size: clamp(16px, 1.8vw, 18px);
+      line-height: 1.85;
+      text-align: left;
       color: #374151
     }
 
-    .abstract-text p:first-child {
-      margin-top: 0
+    .abstract-text p {
+      margin: 0
+    }
+
+    .abstract-text p + p {
+      margin-top: 1.2em
     }
 
     .highlight {
@@ -785,8 +801,10 @@
         <div class="section-head">
           <h2>Abstract</h2>
         </div>
-        <div class="card abstract-text">
-          <p>Category-level in-hand manipulation of articulated objects is a formidable yet underexplored challenge for dexterous robotic hands. This difficulty stems from two core bottlenecks: first, controlling an object's internal degrees of freedom is tightly coupled with maintaining grasp stability on a free-floating base; second, acquiring diverse object models and functional grasps at scale is highly labor-intensive, yet vital for generalization given the system's sensitivity to initial configurations. In this work, we present ArtManip, the first category-level articulated in-hand manipulation method that generalizes across object instances and diverse initial grasps. For initial configuration construction, we develop an automated pipeline that procedurally generates diverse articulated objects and synthesizes task-oriented functional grasps. For policy learning, we propose a robust two-stage training strategy that incorporates articulation physics randomization, reward curriculum, and latent representation distillation to handle complex contact and joint dynamics during deployment. Extensive experiments across four object categories demonstrate that our policy generalizes to unseen instances and varied configurations in simulation, and achieves zero-shot transfer to 12 real-world objects featuring diverse shapes and joint mechanics.</p>
+        <div class="abstract-text">
+          <p>Category-level in-hand manipulation of articulated objects is a formidable yet underexplored challenge for dexterous robotic hands. This difficulty stems from two core bottlenecks: first, controlling an object's internal degrees of freedom is tightly coupled with maintaining grasp stability on a free-floating base; second, acquiring diverse object models and functional grasps at scale is highly labor-intensive, yet vital for generalization given the system's sensitivity to initial configurations.</p>
+          <p>In this work, we present ArtManip, the first category-level articulated in-hand manipulation method that generalizes across object instances and diverse initial grasps. For initial configuration construction, we develop an automated pipeline that procedurally generates diverse articulated objects and synthesizes task-oriented functional grasps. For policy learning, we propose a robust two-stage training strategy that incorporates articulation physics randomization, reward curriculum, and latent representation distillation to handle complex contact and joint dynamics during deployment.</p>
+          <p>Extensive experiments across four object categories demonstrate that our policy generalizes to unseen instances and varied configurations in simulation, and achieves zero-shot transfer to 12 real-world objects featuring diverse shapes and joint mechanics.</p>
         </div>
       </div>
     </section>
