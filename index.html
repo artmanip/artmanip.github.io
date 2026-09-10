@@ -749,8 +749,7 @@
 <body>
   <nav class="nav">
     <div class="nav-inner"><a class="brand" href="#"><span class="mark">✦</span><span>ArtManip</span></a>
-      <div class="links"><a href="#method">Method</a><a href="#results">Results</a><a
-          href="#findings">Findings</a><a href="#bibtex">BibTeX</a></div>
+      <div class="links"><a href="#method">Method</a><a href="#results">Results</a><a href="#bibtex">BibTeX</a></div>
     </div>
   </nav>
   <main>
@@ -836,28 +835,6 @@
             <h2>Generalization across objects and grasps</h2>
           </div>
         </div>
-        <div class="results">
-          <div class="metric">
-            <div class="metric-value">100%</div>
-            <div class="metric-name">Instance Coverage</div>
-            <div class="metric-desc">At least one successful grasp per object instance.</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">90%+</div>
-            <div class="metric-name">Grasp Coverage</div>
-            <div class="metric-desc">Robustness across diverse functional grasps.</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">12/12</div>
-            <div class="metric-name">Real Objects</div>
-            <div class="metric-desc">Zero-shot deployment on physical articulated objects.</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">CSC</div>
-            <div class="metric-name">Long-Horizon Cycles</div>
-            <div class="metric-desc">Repeated open–close manipulation before failure.</div>
-          </div>
-        </div>
         <div class="result-videos">
           <div class="video-panel">
             <h3>Simulation Results</h3>
@@ -887,59 +864,6 @@
                 <div class="label">tong</div>
               </div>
             </div>
-            <div class="result-table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th># Inst.</th>
-                    <th># Total Grasps</th>
-                    <th>IC ↑</th>
-                    <th>GC ↑</th>
-                    <th>CSC mean ↑</th>
-                    <th>CSC max ↑</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Knife</td>
-                    <td>5</td>
-                    <td>54</td>
-                    <td>100%</td>
-                    <td>93.8%</td>
-                    <td>2.6</td>
-                    <td>5.6</td>
-                  </tr>
-                  <tr>
-                    <td>Lighter</td>
-                    <td>5</td>
-                    <td>101</td>
-                    <td>100%</td>
-                    <td>92.8%</td>
-                    <td>1.4</td>
-                    <td>7.0</td>
-                  </tr>
-                  <tr>
-                    <td>Stapler</td>
-                    <td>5</td>
-                    <td>213</td>
-                    <td>100%</td>
-                    <td>76.4%</td>
-                    <td>1.4</td>
-                    <td>8.6</td>
-                  </tr>
-                  <tr>
-                    <td>Tong</td>
-                    <td>5</td>
-                    <td>287</td>
-                    <td>100%</td>
-                    <td>90.6%</td>
-                    <td>2.3</td>
-                    <td>8.6</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
           </div>
           <div class="video-panel">
             <h3>Real-World Results</h3>
@@ -964,85 +888,6 @@
                 </div>
               </div>
             </div>
-            <div class="result-table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th># Inst.</th>
-                    <th># Total Grasps</th>
-                    <th>IC ↑</th>
-                    <th>GC ↑</th>
-                    <th>CSC mean ↑</th>
-                    <th>CSC max ↑</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Knife</td>
-                    <td>3</td>
-                    <td>15</td>
-                    <td>100%</td>
-                    <td>80.0%</td>
-                    <td>1.8</td>
-                    <td>3.3</td>
-                  </tr>
-                  <tr>
-                    <td>Lighter</td>
-                    <td>3</td>
-                    <td>15</td>
-                    <td>100%</td>
-                    <td>86.8%</td>
-                    <td>2.1</td>
-                    <td>3.3</td>
-                  </tr>
-                  <tr>
-                    <td>Stapler</td>
-                    <td>3</td>
-                    <td>15</td>
-                    <td>100%</td>
-                    <td>93.3%</td>
-                    <td>6.1</td>
-                    <td>7.0</td>
-                  </tr>
-                  <tr>
-                    <td>Tong</td>
-                    <td>3</td>
-                    <td>15</td>
-                    <td>100%</td>
-                    <td>100%</td>
-                    <td>5.0</td>
-                    <td>7.0</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="findings">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Key Findings</div>
-            <h2>What did we learn?</h2>
-          </div>
-          <p class="desc">Three concise takeaways for the paper and presentation.</p>
-        </div>
-        <div class="findings">
-          <div class="finding">
-            <h3>Primitive assets are enough for real transfer.</h3>
-            <p>Task-relevant interaction structure matters more than high-fidelity visual geometry for this setting.</p>
-          </div>
-          <div class="finding">
-            <h3>Curriculum resolves the progress–stability trade-off.</h3>
-            <p>The policy must first learn to actuate the joint, then progressively enforce stable in-hand manipulation.
-            </p>
-          </div>
-          <div class="finding">
-            <h3>Functional grasps and physics randomization drive generalization.</h3>
-            <p>High-quality contacts enable exploration; randomized articulation physics improves robustness.</p>
           </div>
         </div>
       </div>
