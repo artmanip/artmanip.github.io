@@ -13,6 +13,9 @@ Static GitHub Pages site for **ArtManip: Category-Level Articulated In-Hand Mani
 - `homepage/crosscate/` - real-world cross-instance videos.
 - `homepage/crossgrasp/` - real-world cross-initial-grasp videos.
 - `homepage/long/` - real-world long-horizon videos.
+- `homepage/web/` - optimized, silent real-world videos and still previews served by the page.
+
+Run `bash scripts/optimize-real-videos.sh` to generate missing web copies from the original real-world clips. These copies fit within 720 × 1280, preserve frame rate and duration, and place MP4 metadata first for progressive playback. The original clips are retained.
 
 ## Deploy
 

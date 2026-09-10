@@ -893,8 +893,9 @@
             <h3>Real-World Results</h3>
             <div class="result-browser" id="real-browser">
               <div class="browser-player">
-                <video id="real-result-video" autoplay muted loop playsinline preload="metadata"
-                  src="homepage/crosscate/knife0.mp4"></video>
+                <video id="real-result-video" autoplay muted loop playsinline preload="auto"
+                  poster="homepage/web/crosscate/knife0.jpg"
+                  src="homepage/web/crosscate/knife0.mp4"></video>
                 <div class="label" id="real-result-label">knife_0</div>
               </div>
               <div class="browser-controls">
@@ -939,24 +940,24 @@
         label: 'Cross Instance',
         clips: {
           knife: [
-            { label: 'knife_0', src: 'homepage/crosscate/knife0.mp4' },
-            { label: 'knife_1', src: 'homepage/crosscate/knife1.mp4' },
-            { label: 'knife_2', src: 'homepage/crosscate/knife2.mp4' }
+            { label: 'knife_0', src: 'homepage/web/crosscate/knife0.mp4' },
+            { label: 'knife_1', src: 'homepage/web/crosscate/knife1.mp4' },
+            { label: 'knife_2', src: 'homepage/web/crosscate/knife2.mp4' }
           ],
           lighter: [
-            { label: 'lighter_0', src: 'homepage/crosscate/lighter0.mp4' },
-            { label: 'lighter_1', src: 'homepage/crosscate/lighter1.mp4' },
-            { label: 'lighter_2', src: 'homepage/crosscate/lighter2.mp4' }
+            { label: 'lighter_0', src: 'homepage/web/crosscate/lighter0.mp4' },
+            { label: 'lighter_1', src: 'homepage/web/crosscate/lighter1.mp4' },
+            { label: 'lighter_2', src: 'homepage/web/crosscate/lighter2.mp4' }
           ],
           stapler: [
-            { label: 'stapler_0', src: 'homepage/crosscate/stapler0.mp4' },
-            { label: 'stapler_1', src: 'homepage/crosscate/stapler1.mp4' },
-            { label: 'stapler_2', src: 'homepage/crosscate/stapler2.mp4' }
+            { label: 'stapler_0', src: 'homepage/web/crosscate/stapler0.mp4' },
+            { label: 'stapler_1', src: 'homepage/web/crosscate/stapler1.mp4' },
+            { label: 'stapler_2', src: 'homepage/web/crosscate/stapler2.mp4' }
           ],
           tong: [
-            { label: 'tong_0', src: 'homepage/crosscate/tong0.mp4' },
-            { label: 'tong_1', src: 'homepage/crosscate/tong1.mp4' },
-            { label: 'tong_2', src: 'homepage/crosscate/tong2.mp4' }
+            { label: 'tong_0', src: 'homepage/web/crosscate/tong0.mp4' },
+            { label: 'tong_1', src: 'homepage/web/crosscate/tong1.mp4' },
+            { label: 'tong_2', src: 'homepage/web/crosscate/tong2.mp4' }
           ]
         }
       },
@@ -964,30 +965,30 @@
         label: 'Cross Initial Grasp',
         clips: {
           knife: [
-            { label: 'grasp_0', src: 'homepage/crossgrasp/knife_grasp0.mp4' },
-            { label: 'grasp_1', src: 'homepage/crossgrasp/knife_grasp1.mp4' }
+            { label: 'grasp_0', src: 'homepage/web/crossgrasp/knife_grasp0.mp4' },
+            { label: 'grasp_1', src: 'homepage/web/crossgrasp/knife_grasp1.mp4' }
           ],
           lighter: [
-            { label: 'grasp_0', src: 'homepage/crossgrasp/lighter_grasp0.mp4' },
-            { label: 'grasp_1', src: 'homepage/crossgrasp/lighter_grasp1.mp4' }
+            { label: 'grasp_0', src: 'homepage/web/crossgrasp/lighter_grasp0.mp4' },
+            { label: 'grasp_1', src: 'homepage/web/crossgrasp/lighter_grasp1.mp4' }
           ],
           stapler: [
-            { label: 'grasp_0', src: 'homepage/crossgrasp/stapler_grasp0.mp4' },
-            { label: 'grasp_1', src: 'homepage/crossgrasp/stapler_grasp1.mp4' }
+            { label: 'grasp_0', src: 'homepage/web/crossgrasp/stapler_grasp0.mp4' },
+            { label: 'grasp_1', src: 'homepage/web/crossgrasp/stapler_grasp1.mp4' }
           ],
           tong: [
-            { label: 'grasp_0', src: 'homepage/crossgrasp/tong_grasp0.mp4' },
-            { label: 'grasp_1', src: 'homepage/crossgrasp/tong_grasp1.mp4' }
+            { label: 'grasp_0', src: 'homepage/web/crossgrasp/tong_grasp0.mp4' },
+            { label: 'grasp_1', src: 'homepage/web/crossgrasp/tong_grasp1.mp4' }
           ]
         }
       },
       longHorizon: {
         label: 'Long-Horizon',
         clips: {
-          knife: [{ label: '40s', src: 'homepage/long/knife.mp4' }],
-          lighter: [{ label: '40s', src: 'homepage/long/lighter.mp4' }],
-          stapler: [{ label: '40s', src: 'homepage/long/stapler.mp4' }],
-          tong: [{ label: '40s', src: 'homepage/long/tong.mp4' }]
+          knife: [{ label: '40s', src: 'homepage/web/long/knife.mp4' }],
+          lighter: [{ label: '40s', src: 'homepage/web/long/lighter.mp4' }],
+          stapler: [{ label: '40s', src: 'homepage/web/long/stapler.mp4' }],
+          tong: [{ label: '40s', src: 'homepage/web/long/tong.mp4' }]
         }
       }
     };
@@ -1043,9 +1044,12 @@
         })
       ));
 
-      realVideo.src = clip.src;
       realLabel.textContent = clip.label;
-      realVideo.play().catch(() => { });
+      if (realVideo.getAttribute('src') !== clip.src) {
+        realVideo.poster = clip.src.replace(/\.mp4$/, '.jpg');
+        realVideo.src = clip.src;
+        realVideo.play().catch(() => { });
+      }
     }
 
     renderRealBrowser();
